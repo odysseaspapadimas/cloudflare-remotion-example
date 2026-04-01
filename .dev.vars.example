@@ -1,0 +1,2 @@
+# This example does not require secrets for local development.
+# Configure non-secret Cloudflare bindings in wrangler.jsonc.

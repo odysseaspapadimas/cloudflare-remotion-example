@@ -1,0 +1,35 @@
+{
+	"name": "cloudflare-remotion-example",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "remotion bundle",
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"test": "node --test --import tsx src/example.test.ts",
+		"test:pipeline": "tsx scripts/test-pipeline.ts",
+		"wrangler:dev": "wrangler dev",
+		"deploy": "wrangler deploy",
+		"types": "wrangler types"
+	},
+	"dependencies": {
+		"@cloudflare/containers": "0.2.0",
+		"@remotion/cli": "4.0.441",
+		"@remotion/renderer": "4.0.441",
+		"express": "^5.1.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"remotion": "4.0.441",
+		"zod": "^4.3.6"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.2",
+		"@types/react": "^19.0.0",
+		"tsx": "^4.0.0",
+		"typescript": "^5.8.2",
+		"wrangler": "4.77.0"
+	},
+	"sideEffects": [
+		"*.css"
+	]
+}

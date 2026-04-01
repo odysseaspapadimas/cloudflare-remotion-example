@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"lib": ["ES2022", "DOM", "DOM.Iterable"],
+		"moduleResolution": "Bundler",
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"outDir": "./dist",
+		"rootDir": ".",
+		"jsx": "react-jsx",
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"isolatedModules": true,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"types": ["node"]
+	},
+	"include": [
+		"src/**/*",
+		"scripts/**/*.ts",
+		"remotion.config.ts",
+		"worker-configuration.d.ts"
+	],
+	"exclude": ["node_modules", "dist", "build"]
+}

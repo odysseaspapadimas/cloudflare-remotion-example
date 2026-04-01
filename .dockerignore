@@ -1,0 +1,10 @@
+node_modules
+.wrangler
+dist
+.remotion
+build
+.git
+.gitignore
+.env*
+docs
+*.md
