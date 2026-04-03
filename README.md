@@ -9,7 +9,37 @@ This example shows the smallest Cloudflare-native architecture that still suppor
 - R2 stores chunk artifacts and the final MP4
 - local `wrangler dev` works through a small worker passthrough fallback
 
+This repository is intended to be a standalone backend reference implementation, not just a minimal containers demo.
+
+## Requirements
+
+- Node.js 22+
+- `pnpm`
+- Docker
+- Cloudflare account with Workers paid plan and Containers access
+- `wrangler` authenticated with `wrangler login`
+
+If this is your first time using Wrangler, run:
+
+```bash
+pnpm wrangler login
+pnpm wrangler whoami
+```
+
+## Documentation
+
+- [`docs/setup-and-deployment.md`](./docs/setup-and-deployment.md)
+- [`docs/render-flow.md`](./docs/render-flow.md)
+- [`docs/cloudflare-vs-portable.md`](./docs/cloudflare-vs-portable.md)
+
 ## Happy Path
+
+Before starting:
+
+- make sure Docker is running
+- make sure `wrangler whoami` shows the Cloudflare account you want to use
+
+For local development, `wrangler dev` uses local R2 storage by default, so you do not need to create a real R2 bucket first.
 
 ### 1. Install dependencies
 
@@ -17,27 +47,19 @@ This example shows the smallest Cloudflare-native architecture that still suppor
 pnpm install
 ```
 
-### 2. Create an R2 bucket
-
-Use the bucket name from `wrangler.jsonc`, or update that file first.
-
-```bash
-pnpm wrangler r2 bucket create cloudflare-remotion-example
-```
-
-### 3. Start the worker and containers stack
+### 2. Start the worker and containers stack
 
 ```bash
 pnpm wrangler:dev
 ```
 
-### 4. Run one render job
+### 3. Run one render job
 
 ```bash
 pnpm test:pipeline
 ```
 
-### 5. Download the output
+### 4. Download the output
 
 ```bash
 curl -L http://127.0.0.1:8787/jobs/job:hello-world:123/output -o output.mp4
@@ -107,6 +129,8 @@ If the job is still running, the endpoint returns `409`.
 9. The leader downloads all chunk artifacts and combines them into a final MP4.
 10. The final MP4 is uploaded to R2 and exposed through `GET /jobs/:id/output`.
 
+For a fuller architecture walkthrough, see [`docs/render-flow.md`](./docs/render-flow.md).
+
 ## Defaults
 
 The example intentionally keeps defaults simple:
@@ -123,6 +147,8 @@ For the demo composition, a worker cap of `2` is usually faster than starting on
 - deployed environments use Cloudflare outbound host routing for `coordinator.internal` and `r2.internal`
 - local `wrangler dev` uses worker passthrough endpoints under `/internal/coordinator/...` and `/internal/r2/...`
 - containers reach the local worker through `host.docker.internal:<wrangler-port>`
+
+For Cloudflare-specific implementation details and portability boundaries, see [`docs/cloudflare-vs-portable.md`](./docs/cloudflare-vs-portable.md).
 
 ## Optional Tuning
 
@@ -159,6 +185,12 @@ pnpm test:pipeline
 - no frontend UI
 - no auth, billing, or multi-tenant concerns
 - local development depends on Docker resolving `host.docker.internal`
+
+## Deployment
+
+For deployment and verification steps, see [`docs/setup-and-deployment.md`](./docs/setup-and-deployment.md).
+
+Deployment does require a real R2 bucket.
 
 ## Core Files
 
