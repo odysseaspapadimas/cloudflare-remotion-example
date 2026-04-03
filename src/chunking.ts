@@ -1,6 +1,6 @@
 import type { RenderFrameRange } from "./types.ts";
 
-export const DEFAULT_RENDER_TARGET_CHUNK_COUNT = 12;
+export const DEFAULT_RENDER_TARGET_CHUNK_COUNT = 4;
 export const DEFAULT_RENDER_TARGET_CHUNK_COUNT_MAX = 64;
 export const DEFAULT_MIN_FRAMES_PER_CHUNK = 120;
 export const DEFAULT_RENDER_WORKER_POOL_SIZE_MAX = 2;
