@@ -136,7 +136,7 @@ pnpm wrangler r2 bucket create cloudflare-remotion-example
 ### 3. Deploy
 
 ```bash
-pnpm deploy
+pnpm run deploy
 ```
 
 ### 4. Verify the deployment
